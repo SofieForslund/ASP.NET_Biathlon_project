@@ -1,0 +1,156 @@
+﻿
+@model AnalyzeViewModel
+
+
+<h1>Filtrera på tidsintervall</h1>
+
+@using (Html.BeginForm("Analyze", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Startdate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.Startdate, new { htmlAttributes = new { @class = "selector dropdownMargins" } })
+            @Html.ValidationMessageFor(model => model.Startdate, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.LabelFor(model => model.Enddate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.Enddate, new { htmlAttributes = new { @class = "selector dropdownMargins" } })
+            @Html.ValidationMessageFor(model => model.Enddate, "", new { @class = "text-danger" })
+
+        </div>
+
+    </div>
+    <h1>Avancerad filtrering</h1>
+    <div class="col-md-10">
+        @Html.DropDownListFor(m => m.Stance,
+            new List<SelectListItem>
+                {
+                   new SelectListItem{ Text="Välj position", Value = "Välj position"},
+                   new SelectListItem{ Text="Stående position", Value = "Standing"},
+                   new SelectListItem{ Text="Liggande position", Value = "Prone" }
+                }, new { @class = "selector dropdownMargins" })
+    </div>
+
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.ShotSerieNumber, new { placeholder = "Serienummer", @class = "selector dropdownMargins" })
+    </div>
+    <p>Starttid</p>
+    <div class="col-md-10">
+
+        @Html.EditorFor(model => model.StartTime, new { placeholder = "Starttid", htmlAttributes = new { @class = "selector dropdownMargins" } })
+
+    </div>
+    <p>Sluttid</p>
+    <div class="col-md-10 marginbottom">
+        @Html.EditorFor(model => model.EndTime, new { placeholder = "Sluttid", htmlAttributes = new { @class = "selector dropdownMargins" } })
+
+    </div>
+    <button class="btn-grad marginbottom">Sök</button>
+</div>
+}
+
+<script>
+    function showDiv(divId, element) {
+        document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+
+    }
+</script>
+
+<div class="table">
+    <table>
+        <tbody>
+            <tr class="tabletitles">
+                <th>Datum</th>
+                <th>nr</th>
+                <th>Ställning</th>
+                <th>Klockslag</th>
+                <th>Skott 1</th>
+                <th>Puls Skott 1</th>
+                <th>Skott 2</th>
+                <th>Puls Skott 2</th>
+                <th>Skott 3</th>
+                <th>Puls Skott 3</th>
+                <th>Skott 4</th>
+                <th>Puls Skott 4</th>
+                <th>Skott 5</th>
+                <th>Puls Skott 5</th>
+            </tr>
+
+
+            @if (Model.SeriesForDropDown.Count > 0)
+            {
+
+                @foreach (var shotseries in Model.SeriesForDropDown)
+                {
+
+
+
+                    <tr class="shotseries">
+
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.dateTime.Date.ToString("yyMMdd")</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.ShotSerieNumber</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.stance</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.dateTime.ToString("HH:mm:ss")</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[0].result</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[0].heartRate</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[1].result</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[1].heartRate</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[2].result</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[2].heartRate</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[3].result</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[3].heartRate</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[4].result</a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ShotSeriesByDate", "Statistics", new { date = shotseries.dateTime })">@shotseries.shots[4].heartRate</a>
+                        </td>
+
+                    </tr>
+
+
+                }
+
+            }
+
+
+        </tbody>
+
+    </table>
+    <div class="text-danger" id="hidden_div4" onchange="showDiv('hidden_div4', this)">
+        <h2>@Model.ZeroShootingsFound</h2>
+    </div>
+</div>
+
+
+
+

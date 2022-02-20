@@ -1,0 +1,245 @@
+﻿@model ShotSeriesViewModel
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+<div class="flexcontainer">
+    <h1>@Html.DisplayNameFor(model => model.SeriesNumber) @Html.DisplayFor(model => model.SeriesNumber)</h1>
+</div>
+
+<div class="flexcontainer">
+    <h3 class="pagetitles"> @Html.DisplayFor(model => model.Date), @Html.DisplayFor(model => model.Location) </h3>
+</div>
+
+<label class="checkbox">
+    Skjutserie
+    <input id="shots cb1" type="checkbox" style='display: block' checked onclick="toggle('divMenu1')">
+    <span class="checkmark"></span>
+</label>
+
+<label class="checkbox">
+    Väder
+    <input id="shots cb2" type="checkbox" style='display: block' checked onclick="toggle('divMenu2')">
+    <span class="checkmark"></span>
+</label>
+
+<label class="checkbox">
+    Träffbild
+    <input id="shots cb3" type="checkbox" style='display: block' checked onclick="toggle('divMenu3')">
+    <span class="checkmark"></span>
+</label>
+
+<label class="checkbox">
+    Siktesrörelse
+    <input id="shots cb4" type="checkbox" style='display: block' checked onclick="toggle('divMenu4')">
+    <span class="checkmark"></span>
+</label>
+
+
+
+<div name="stanceDiv">
+    @if (Model.Shotlist[0].Stance == "Stående")
+    {
+        <div class="innerstanceflex">
+            <img class="stancestanding" src="~/Images/standing1.png" style="border: solid; border-width: 6px; border-color: #19A186; " />
+            <img class="stanceprone" src="~/Images/Prone1.png" />
+        </div>
+        <div class="innerstanceflex">
+            <p class="stances">@Html.DisplayNameFor(model => model.Shotlist[0].Stance) &nbsp;</p>
+            <p class="stances">@Html.DisplayFor(model => model.Shotlist[0].Stance)</p>
+        </div>
+
+    }
+
+    else
+    {
+        <div class="innerstanceflex">
+            <img class="stancestanding" src="~/Images/standing1.png" />
+            <img class="stanceprone" src="~/Images/Prone1.png" style="border: solid; border-width: 6px; border-color: #19A186; " />
+        </div>
+        <div class="innerstanceflex">
+            <p class="stances">@Html.DisplayNameFor(model => model.Shotlist[0].Stance) &nbsp;</p>
+            <p class="stances">@Html.DisplayFor(model => model.Shotlist[0].Stance)</p>
+        </div>
+    }
+
+</div>
+
+
+<div id="divMenu2" name="weatherdiv">
+    <div class="flexcontainer">
+        <h3>@Html.DisplayNameFor(model => model.WindSpeedWithDirection) &nbsp; </h3>
+        <h3>@Html.DisplayFor(model => model.WindSpeedWithDirection)</h3>
+    </div>
+</div>
+
+<div id="divMenu1" name="chartdiv" class="marginbottom">
+    <h3>Tid och puls för respektive skott</h3>
+
+    <div class="chartclass">
+        <canvas id="hitsChart" width="400" height="150"></canvas>
+    </div>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Shotlist[0].ShotNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.Shotlist[0].Pulse)</th>
+                <th>@Html.DisplayNameFor(model => model.Shotlist[0].Time)</th>
+                <th>@Html.DisplayNameFor(model => model.Shotlist[0].Result)</th>
+            </tr>
+            @for (int i = 0; i < Model.Shotlist.Count; i++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Shotlist[i].ShotNumber)</td>
+                    <td>@Html.DisplayFor(model => model.Shotlist[i].Pulse)</td>
+                    <td>@Html.DisplayFor(model => model.Shotlist[i].Time)</td>
+                    <td>@Html.DisplayFor(model => model.Shotlist[i].Result)</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<script>
+    function toggle(id) {
+        var ele = document.getElementById(id);
+        if (ele)
+            ele.style.display = ele.style.display === "none" ? "initial" : "none";
+    }
+</script>
+
+
+<script>
+
+    const jsonBom = JSON.parse('@Html.Raw(Json.Serialize(@Model.JsonListMisses))');
+    const jsonHit = JSON.parse('@Html.Raw(Json.Serialize(@Model.JsonListHits))');
+
+    const data = {
+        labels: ['Bom', 'Träff'],
+        datasets: [{
+            label: ['Bom'],
+            backgroundColor: 'rgba(255, 0, 0)',
+            borderColor: 'rgba(255, 0, 0)',
+            title: 'Bom',
+            data: jsonBom
+            }, {
+                label: ['Träff'],
+            backgroundColor: 'rgba(0, 128, 0)',
+            borderColor: 'rgba(0, 128, 0)',
+            title: 'Träff',
+            data: jsonHit,
+            borderWidth: 1,
+            clip: false,
+        }],
+    }
+
+    const config = {
+        type: 'bubble',
+        data,
+        options: {
+            layout: {
+                padding: 20
+            },
+            scales: {
+                yAxis: {
+                    title: {
+                        color: 'grey',
+                        display: true,
+                        text: 'Puls i BPM',
+                        font: {
+                            size: 15,
+                        },
+                    },
+                    min: 90,
+                    ticks: {
+                        stepSize: 10
+                    }
+                },
+                xAxis: {
+                    title: {
+                        color: 'grey',
+                        display: true,
+                        text: 'Skjutseriens sekundintervall',
+                        font: {
+                            size: 15,
+                        },
+                    }
+
+                }
+            }
+
+        }
+
+    };
+
+        const myChart = new Chart(
+            document.getElementById('hitsChart'),
+            config
+        );
+
+</script>
+
+<div name="Shotcoordinates" class="targetcontainer marginbottom" id="divMenu3">
+
+    <div class="shot2 popup">
+        <img src="~/Images/Targets/shotstand1.png" />
+    </div>
+    <div class="shot2 popup">
+        <img src="~/Images/Targets/shotstand2.png" />
+    </div>
+    <div class="shot2 popup">
+        <img src="~/Images/Targets/shotstand3.png" />
+    </div>
+    <div class="shot2 popup">
+        <img src="~/Images/Targets/shotstand4.png" />
+    </div>
+    <div class="shot2 popup">
+        <img src="~/Images/Targets/shotstand5.png" />
+    </div>
+
+</div>
+
+<div name="AimtrackerData" class="targetcontainer marginbottom" id="divMenu4">
+
+    <div class="shot2 popup" onclick="AimTracker('myPop1')">
+        <img class="aimtrackerimg" src="~/Images/Targets/sight.png" />
+        <span class="popuptext" id="myPop1"><img src="~/Images/Targets/aimtrackerbig.png" /></span>
+    </div>
+    <div class="shot2 popup" onclick="AimTracker('myPop2')">
+        <img class="aimtrackerimg" src="~/Images/Targets/sight.png" />
+        <span class="popuptext" id="myPop2"><img src="~/Images/Targets/aimtrackerbig.png" /></span>
+    </div>
+    <div class="shot2 popup" onclick="AimTracker('myPop3')">
+        <img src="~/Images/Targets/sight.png" />
+        <span class="popuptext" id="myPop3"><img src="~/Images/Targets/aimtrackerbig.png" /></span>
+    </div>
+    <div class="shot2 popup" onclick="AimTracker('myPop4')">
+        <img src="~/Images/Targets/sight.png" />
+        <span class="popuptext" id="myPop4"><img src="~/Images/Targets/aimtrackerbig.png" /></span>
+    </div>
+    <div class="shot2 popup" onclick="AimTracker('myPop5')">
+        <img src="~/Images/Targets/sight.png" />
+        <span class="popuptext" id="myPop5"><img src="~/Images/Targets/aimtrackerbig.png" /></span>
+    </div>
+</div>
+
+
+<script>
+    function AimTracker(id) {
+        var popup = document.getElementById(id);
+        popup.classList.toggle("show");
+    }
+</script>
+
+
+
+
+
+
+
+
+

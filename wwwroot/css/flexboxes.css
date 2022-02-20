@@ -1,0 +1,174 @@
+
+.flexSpacebetween {
+    justify-content: space-evenly; 
+    display: flex; 
+    margin-bottom: 60px;  
+    flex-wrap: wrap; 
+}
+
+.marginbottom {
+    margin-bottom: 50px; 
+}
+
+
+.targets {
+    height: 100%;
+    width: auto;
+}
+
+.shot2 {
+    margin: 45px;
+}
+
+.innerstanceflex {
+    display: flex;
+    flex-direction: row; 
+    padding-right: 80px; 
+    font-family: arial;
+    width: 250px;
+}
+
+.targetcontainer {
+    flex-wrap: wrap;
+    border: solid;
+    border-width: 2px;
+    border-color: gray; 
+    justify-content: center; 
+}
+
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 20px;
+    font-family: arial;
+    flex-wrap: wrap;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.flexdashcards{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    font-family: arial;
+    flex-wrap: wrap;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.innerflexcontainer {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    padding: 0px, 0px, 0px, 0px;
+    font-family: arial;
+    width: 300px;
+    align-items: center;
+}
+
+.statisticsflex {
+    background-color: #f5f7fa;
+    border: solid 1px #b8c6db;
+    padding: 5px;
+    flex: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    margin: 8px;
+    border-radius: 15%;
+    width: contain; 
+}
+
+.flexbox {
+    background-color: #f5f7fa;
+    border: solid 1px #b8c6db;
+    padding: 5px;
+    flex: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    margin: 8px;
+    border-radius: 15%;
+}
+
+
+.innerleftflexbox {
+    background-color: #fde7f9;
+    background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 94%);
+    font-weight: bolder;
+    border: solid 1px #b8c6db;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 0 20px #eee;
+    margin: 1px;
+    border-top-left-radius: 20%;
+}
+
+.innerrightflexbox {
+    background-color: #aacaef;
+    background-image: linear-gradient(315deg, #aacaef 0%, #fde7f9 64%);
+    font-weight: bolder;
+    border: solid 1px #b8c6db;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 0 20px #eee;
+    margin: 1px;
+    border-top-right-radius: 20%;
+}
+
+.innerbottomflexbox {
+    background-color: #aacaef;
+    background-image: linear-gradient(315deg, #aacaef 0%, #fde7f9 64%);
+    font-weight: bolder;
+    border: solid 1px #b8c6db;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 0 20px #eee;
+    margin: 1px;
+    border-bottom-left-radius: 40%;
+    border-bottom-right-radius: 40%;
+}
+
+/*.innerleftflexboxstatistics {
+    background-color: #fde7f9;
+    background-image: linear-gradient(315deg, #fde7f9 0%, #aacaef 94%);
+    font-weight: bolder;
+    border: solid 1px #b8c6db;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 0 20px #eee;
+    margin: 1px;
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+}
+
+.innerrightflexboxstatistics {
+    background-color: #aacaef;
+    background-image: linear-gradient(315deg, #aacaef 0%, #fde7f9 64%);
+    font-weight: bolder;
+    border: solid 1px #b8c6db;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 0 20px #eee;
+    margin: 1px;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+}*/
+
+
+
+/*.innerlowerleftflexbox {
+    background-color: #9996c6;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    margin: 1px;
+}
+
+.innerlowerrightflexbox {
+    background-color: #b196c6;
+    padding: 10px;
+    flex: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    margin: 1px;
+}*/
+
+

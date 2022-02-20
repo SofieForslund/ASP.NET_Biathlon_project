@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
+        Denna webbplats använder cookies för attt säkerställa att du får den bästa upplevelsen på vår webbplats. <a href="https://www.cookiesandyou.com/" target="_blank" rel="noopener noreferrer">Läs Mer</a>.
+        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <span aria-hidden="true">Acceptera</span>
+        </button>
+    </div>
+    <script src="~/js/site.js"></script>    
+}

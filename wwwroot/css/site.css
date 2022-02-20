@@ -1,0 +1,311 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+
+.chartclass {
+    box-shadow: 0 0 20px #eee;
+}
+
+.borderclass {
+    border: solid 1px #b8c6db;
+    box-shadow: 0 0 20px #eee;
+    margin: 10px;
+    width: 150px;
+    background-color: #b8c6db;
+    background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+}
+
+.pulsetime{
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+
+/*input:checked + #divMenu1 {  //dessa verkar inte behövas
+    display: block;
+}
+
+input:checked + #divMenu2 {
+    display: block;
+}
+
+input:checked + #divMenu3 {
+    display: block;
+}*/
+
+/*Tillhör ShotSerie-vyn*/
+.dropdownMargins{
+    margin: 5px;
+}
+#hidden_div, #hidden_div2, #hidden_div3{
+    display: none;
+}
+
+#hidden_div4{
+    text-align:center;
+}
+.droplabels {
+    font-weight: bolder; 
+    margin-left: 5px; 
+}
+
+.selector{
+    background-color: #b8c6db;
+    background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+    font-weight: bold;
+    box-shadow: 0 0 20px #eee;
+    width: 200px;
+    height: 45px;
+    position: relative;
+    display: inline-block;
+    border: solid black 2px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.selector-content {
+    font-weight: bold;
+    background-color: greenyellow;
+}
+
+
+.btn-grad {
+    background-image: linear-gradient(to right, #085078 0%, #85D8CE 51%, #085078 100%);
+    font-weight: bold; 
+    font-size: 150%; 
+    
+}
+
+.btn-grad {
+    margin: 10px;
+    padding: 5px 35px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+    .btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+    }
+         
+    .test {
+        font-size: 50px; 
+    }
+
+
+
+.pagetitles {
+    color: cadetblue;
+    font-weight: bolder;
+}
+
+.navbarlogo {
+    border-radius: 50%;
+    height: auto;
+    width: 50%;
+}
+
+.navbarlogo2 {
+    border-radius: 100%; 
+    height: auto;
+    width: 20%;
+    background-color: #58c8c9;
+    background-image: linear-gradient(43deg, #58c8c9 0%, #e090db 46%, #58c8c9 100%);
+}
+
+.stances{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.stanceprone {
+    border-radius: 10%;
+    height: auto;
+    width: 30%;
+    margin: 8px;
+    box-shadow: 0 0 20px #eee;
+}
+
+.stancestanding {
+    border-radius: 10%;
+    height: auto;
+    width: 30%;
+    margin: 8px;
+    box-shadow: 0 0 20px #eee;
+}
+
+.chart, .shots {
+    border: solid;
+    border-color: grey;
+    margin-top: 50px;
+}
+
+/*Tillhör ShotSerie-vyn*/
+
+.profile {
+    background-color: white;
+    border-radius: 100%;
+    height: 40px;
+    width: auto;
+}
+
+.logo {
+}
+
+
+header {
+    background-image: linear-gradient(to top, #97d9e1 60%, #d9afd9 100%);
+    background-size: 100%;
+    background-size: cover; 
+    border-color: darkcyan;
+    color: dimgray;
+}
+
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    font-size: 36px;
+    color: dimgray;
+}
+
+.navbar {
+    border-color: black;
+    background-image: inherit;
+    font-size: 18px;
+
+}
+
+#hitsChart{
+    background-color: white;
+}
+/*background-image: linear-gradient(to top, #330867 0%, #30cfd0 100%);*/
+/* Provide sufficient contrast against white background */
+a {
+    color: black;
+    text-decoration: none;
+    list-style: none;
+}
+
+    a:link, a:hover, a:active {
+        text-decoration: none;
+        color:black;
+    }
+
+
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.button {
+    background: #330867;
+    color: white;
+    border-color: black;
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+    border-block-color: black;
+    border-color: black;
+}
+
+.nav-link.active {
+   
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: darkcyan;
+    background-color: #1b6ec2;
+    border-color: black;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (max-width: 700px) {
+    html {
+        font-size: 90%;
+    }
+
+    navbar-brand {
+        font-size: 50%;
+    }
+
+    .targets img {
+        height: 10%; 
+        width: Auto; 
+    }
+   
+}
+
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/*.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}*/
+
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    border-color: black;
+    margin-bottom: 60px;
+    color: darkslategray;
+    background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 60%); /* denna är tillagd som gradient */
+    background-size: 100%; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}

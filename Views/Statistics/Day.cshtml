@@ -1,0 +1,201 @@
+﻿
+@model StatisticsViewModel
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+<div class="flexcontainer">
+    <h3 class="pagetitles">Statistik</h3>
+</div>
+
+
+<div class="table">
+    <table>
+        <tbody>
+            <tr class="tabletitles">
+                <th class="tablemargins">@Html.DisplayNameFor(model => model.TodaysShotSeries[0].ShotSeriesNumber)</th>
+                <th class="tablemargins">@Html.DisplayNameFor(model => model.TodaysShotSeries[0].SeriesTime)</th>
+                <th class="tablemargins">@Html.DisplayNameFor(model => model.TodaysShotSeries[0].HitRatingPercentage)</th>
+                <th class="tablemargins">@Html.DisplayNameFor(model => model.TodaysShotSeries[0].StanceInSwedish)</th>
+                <th class="tablemargins">@Html.DisplayNameFor(model => model.TodaysShotSeries[0].DurationInSwedish)</th>
+                <th class="tablemargins">@Html.DisplayNameFor(model => model.TodaysShotSeries[0].WindSpeedWithDegree)</th>
+            </tr>
+
+            @for (int i = 0; i < Model.TodaysShotSeries.Count; i++)
+            {
+
+        <tr class="shotseries">
+            <td><a href="@Url.Action("ShotSeriesByDate","Statistics", new {date = Model.TodaysShotSeries[i].DateTime})"> @Html.DisplayFor(model => model.TodaysShotSeries[i].ShotSeriesNumber)</a></td>
+            <td><a href="@Url.Action("ShotSeriesByDate","Statistics", new {date = Model.TodaysShotSeries[i].DateTime})"> @Html.DisplayFor(model => model.TodaysShotSeries[i].SeriesTime)</a></td>
+            <td><a href="@Url.Action("ShotSeriesByDate","Statistics", new {date = Model.TodaysShotSeries[i].DateTime})"> @Html.DisplayFor(model => model.TodaysShotSeries[i].HitRatingPercentage)</a></td>
+            <td><a href="@Url.Action("ShotSeriesByDate","Statistics", new {date = Model.TodaysShotSeries[i].DateTime})"> @Html.DisplayFor(model => model.TodaysShotSeries[i].StanceInSwedish)</a></td>
+            <td><a href="@Url.Action("ShotSeriesByDate","Statistics", new {date = Model.TodaysShotSeries[i].DateTime})">@Html.DisplayFor(model => model.TodaysShotSeries[i].DurationInSwedish)</a></td>
+            <td><a href="@Url.Action("ShotSeriesByDate","Statistics", new {date = Model.TodaysShotSeries[i].DateTime})">@Html.DisplayFor(model => model.TodaysShotSeries[i].WindSpeedWithDegree)</a></td>
+        </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="flexcontainer">
+    <h3>Antal träffar per skjutserie</h3>
+</div>
+
+<div class="marginbottom">
+    <canvas id="hitsChart"></canvas>
+</div>
+
+@*//Pie chart nedan som vi valt att inte displaya. Men det fungerar.*@ 
+
+@*<div class="flexcontainer">
+    <h3>Överblick över dagens träffar och missar</h3>
+</div>
+
+<div class="flexcontainer marginbottom">
+    <div class="flexcontainer">
+        <canvas id="hitsMiss"></canvas>
+    </div>
+</div>*@
+
+<script>
+    var jsonHits = JSON.parse('@Html.Raw(Json.Serialize(@Model.NumberOfHitsPerSerie))')
+    var jsonSeriesOfDay = JSON.parse('@Html.Raw(Json.Serialize(@Model.ShotSeriesOfTheDay))')
+    const hitsChart = document.getElementById('hitsChart').getContext('2d');
+    const chartOne = new Chart(hitsChart, {
+        type: 'bar',
+        data: {
+            labels: jsonSeriesOfDay,
+            datasets: [{
+                label: 'Antal träffar per skjutserie',
+                data: jsonHits,
+                backgroundColor: [
+                    'rgb(0, 0, 128, 0.75)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: {
+                    max: 5,
+                    ticks: {
+                        precision: 0,
+                        stepSize: 1,
+
+                    }
+                }
+            }
+        }
+    });
+    var jsonHitsNMisses = JSON.parse('@Html.Raw(Json.Serialize(@Model.HitsAndMissesPieChartData))')
+    var jsonHits = JSON.parse('@Html.Raw(Json.Serialize(@Model.NumberOfHitsOfTheDay))')
+    const hitsMiss = document.getElementById('hitsMiss').getContext('2d');
+    const chartTwo = new Chart(hitsMiss, {
+        type: 'pie',
+        data: {
+            labels: ['Träffar', 'Missar'],
+            datasets: [{
+                label: 'Träffsäkerhet',
+                data: jsonHitsNMisses,
+                backgroundColor: [
+                    'rgb(0, 0, 128, 0.75)',
+                    'rgb(255, 99, 132)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+</script>
+
+
+
+@*<div class="flexcontainer">
+    <h3>Antal träffar per skjutserie</h3>
+</div>
+
+<div class="marginbottom">
+    <canvas id="hitsChart"></canvas>
+</div>
+
+<div class="flexcontainer">
+    <h3>Överblick över dagens träffar och missar</h3>
+</div>
+
+<div class="flexcontainer marginbottom">
+    <div class="flexcontainer">
+        <canvas id="hitsMiss"></canvas>
+    </div>
+</div>*@
+
+<script>
+
+    var jsonHits = JSON.parse('@Html.Raw(Json.Serialize(@Model.NumberOfHitsPerSerie))')
+    var jsonSeriesOfDay = JSON.parse('@Html.Raw(Json.Serialize(@Model.ShotSeriesOfTheDay))')
+
+
+    const hitsChart = document.getElementById('hitsChart').getContext('2d');
+    const chartOne = new Chart(hitsChart, {
+        type: 'bar',
+        data: {
+            labels: jsonSeriesOfDay,
+            datasets: [{
+                label: 'Antal träffar per skjutserie',
+                data: jsonHits,
+                backgroundColor: [
+                    'rgb(0, 0, 128, 0.75)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: {
+                    max: 5,
+                    ticks: {
+                        precision: 0,
+                        stepSize: 1,
+
+                    }
+
+                }
+            }
+        }
+    });
+
+    @*//Pie chart nedan som vi valt att inte displaya. Men det fungerar.*@ 
+    var jsonHitsNMisses = JSON.parse('@Html.Raw(Json.Serialize(@Model.HitsAndMissesPieChartData))')
+    var jsonHits = JSON.parse('@Html.Raw(Json.Serialize(@Model.NumberOfHitsOfTheDay))')
+
+    const hitsMiss = document.getElementById('hitsMiss').getContext('2d');
+    const chartTwo = new Chart(hitsMiss, {
+        type: 'pie',
+        data: {
+            labels: ['Träffar', 'Missar'],
+            datasets: [{
+                label: 'Träffsäkerhet',
+                data: jsonHitsNMisses,
+                backgroundColor: [
+                    'rgb(0, 0, 128, 0.75)',
+                    'rgb(255, 99, 132)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+
+</script>
+
+
+
+
+
+
+

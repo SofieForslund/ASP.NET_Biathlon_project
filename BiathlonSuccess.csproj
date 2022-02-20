@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>843a75e3-4e9e-41df-9f63-c5399d845aa3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\profile_picture_user_icon_153847.png" />
+    <None Remove="TestDSUDb.db-shm" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bootstrap.Datepicker" Version="1.8.0.1" />
+    <PackageReference Include="Fitbit.NET" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+    <PackageReference Include="RestSharp" Version="107.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Mock\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\profile_picture_user_icon_153847.png" />
+  </ItemGroup>
+
+</Project>

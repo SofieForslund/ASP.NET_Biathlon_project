@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Skidskytteklubben";
+}
+
+@model ShootingsViewModel
+
+
+<div class="flexSpacebetween">
+    <div>
+        <h5>@Html.DisplayFor(model => model.DayOfTheWeek), &nbsp;</h5>
+        <h5>@Html.DisplayFor(model => model.TodaysDate)</h5>
+    </div>
+
+   
+        @if (Model.ShooterName == null)
+        {
+            <h1>Välkommen!</h1>
+        }
+        else
+        {
+            <h1>Välkommen @Html.DisplayFor(model => model.ShooterName)!</h1>
+        }
+        
+  
+
+    <div>
+            <img class="profile" src="@Html.DisplayFor(model => model.ImageOfShooter)" />
+    </div>
+</div>
+
+
+<div class="flexSpacebetween">
+    <div name="DashCards" class="dashwidth">
+        <div class="flexcontainer">
+            <h3 class="pagetitles">Dina senaste träningspass</h3>
+        </div>
+
+        <div id="div1" style="display:block;">
+            <div class="flexdashcards">
+                @for (int i = 0; i < Model.Shootings.Count; i++)
+                {
+                    <a href="@Url.Action("Day", "Statistics", new { date = Model.Shootings[i].Date.Date })">
+                        <div class="flexbox">
+                            <h2>@Html.DisplayFor(model => model.Shootings[i].DayOfTheWeek) @Html.DisplayFor(model => model.Shootings[i].ShootingTime)</h2>
+                            <div class="innerflexcontainer">
+                                <div class="innerleftflexbox">
+                                    <p>@Html.DisplayNameFor(model => model.Shootings[i].HitRatingShooting)</p>
+                                    <p>@Html.DisplayFor(model => model.Shootings[i].HitRatingShooting)</p>
+                                </div>
+                                <div class="innerrightflexbox">
+                                    <p>@Html.DisplayNameFor(model => model.Shootings[i].NumberOfShotSeries)</p>
+                                    <p>@Html.DisplayFor(model => model.Shootings[i].NumberOfShotSeries)</p>
+                                </div>
+                            </div>
+                            <div class="innerbottomflexbox">
+                                <p>@Html.DisplayFor(model => model.Shootings[i].Location)</p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+  </div>
+
+
+    <div class="dashwidth">
+        <div class="flexcontainer">
+            <h3 class="pagetitles">Säsongsstatistik</h3>
+        </div>
+        <div class="flexcontainer">
+
+            <table class="tabledash">
+                <tbody>
+                    <tr class="tabletitles">
+                        <th>@Html.DisplayNameFor(model => model.ShooterStatistics[0].Season)</th>
+                        <th>@Html.DisplayNameFor(model => model.ShooterStatistics[0].StandingPercentage)</th>
+                        <th>@Html.DisplayNameFor(model => model.ShooterStatistics[0].PronePercentage)</th>
+                    </tr>
+
+
+
+                    @for (int i = 0; i < Model.ShooterStatistics.Count; i++)
+                    {
+                        @if (Model.ShooterStatistics[i].PronePercentage == "")
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => model.ShooterStatistics[i].Season)</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => model.ShooterStatistics[i].Season)</td>
+                                <td>@Html.DisplayFor(model => model.ShooterStatistics[i].StandingPercentage)</td>
+                                <td>@Html.DisplayFor(model => model.ShooterStatistics[i].PronePercentage)</td>
+                            </tr>
+
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+
